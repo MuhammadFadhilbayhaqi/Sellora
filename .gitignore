@@ -1,0 +1,28 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules/
+
+# Electron & Vite Build Output (JANGAN DI UPLOAD)
+dist/
+release/
+out/
+build/
+
+# OS Specific
+.DS_Store
+Thumbs.db
+
+# Environment Variables (SANGAT PENTING UTK FIREBASE NANTI)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.vscode/
+.idea/
