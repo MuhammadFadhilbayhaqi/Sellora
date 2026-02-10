@@ -1,0 +1,70 @@
+.auth-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #fca5a5;
+    /* Using a soft red/pink tone as a base, strictly for example. Will adjust to match theme. */
+    background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+}
+
+.auth-container {
+    display: flex;
+    width: 900px;
+    height: 600px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.auth-branding {
+    flex: 1;
+    background-color: #ef4444;
+    /* Primary brand color matching the red theme roughly */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+}
+
+.auth-branding h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.auth-branding p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.auth-content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    /* Let the form take full width */
+    background-color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .auth-container {
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+    }
+
+    .auth-branding {
+        padding: 20px;
+    }
+
+    .auth-content {
+        padding: 30px;
+    }
+}

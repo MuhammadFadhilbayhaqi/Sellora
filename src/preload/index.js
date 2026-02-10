@@ -1,6 +1,14 @@
-const { contextBridge } = require('electron');
+const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('api', {
-  // Disini nanti kita taruh fungsi: createTransaction, getProducts, dll
-  getAppVersion: () => process.versions.electron,
+  getAppVersion: () => ipcRenderer.invoke('app:get-version'),
+  ping: () => 'pong',
+  getSavedVersion: () => ipcRenderer.invoke('app:get-saved-version'),
+  createTransaction: (payload) => ipcRenderer.invoke('transaction:create', payload),
+  listTransactions: (limit) => ipcRenderer.invoke('transaction:list', limit),
+  auth: {
+    login: (credentials) => ipcRenderer.invoke('auth:login', credentials),
+    register: (userData) => ipcRenderer.invoke('auth:register', userData),
+  }
 });
+

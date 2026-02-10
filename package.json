@@ -19,11 +19,14 @@
     "cross-env": "^10.1.0",
     "electron": "^39.2.7",
     "electron-builder": "^26.4.0",
+    "electron-rebuild": "^3.2.9",
     "wait-on": "^9.0.3"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.93.3",
+    "bcrypt": "^6.0.0",
     "better-sqlite3": "^12.6.0",
-    "firebase-admin": "^13.6.0",
+    "dotenv": "^17.2.3",
     "uuid": "^13.0.0"
   }
 }
