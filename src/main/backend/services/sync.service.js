@@ -48,6 +48,6 @@ function cleanupOldTransactions() {
 }
 
 module.exports = {
-  syncPendingTransactions,  
+  syncPendingTransactions,
   cleanupOldTransactions,
 };

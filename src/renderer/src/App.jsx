@@ -7,6 +7,12 @@ import Login from './features/auth/Login';
 import Register from './features/auth/Register';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import CategoryList from './features/master/CategoryList';
+import UnitList from './features/master/UnitList';
+import ProductList from './features/master/ProductList';
+import CustomerList from './features/master/CustomerList';
+import SupplierList from './features/master/SupplierList';
+import UserList from './features/master/UserList';
 import './App.css';
 
 function App() {
@@ -20,7 +26,15 @@ function App() {
             </ProtectedRoute>
           }>
             <Route index element={<Dashboard />} />
-            {/* Add other routes here later */}
+
+            {/* Master Data Routes */}
+            <Route path="master/kategori" element={<CategoryList />} />
+            <Route path="master/satuan" element={<UnitList />} />
+            <Route path="master/produk" element={<ProductList />} />
+            <Route path="master/pelanggan" element={<CustomerList />} />
+            <Route path="master/supplier" element={<SupplierList />} />
+            <Route path="master/pengguna" element={<UserList />} />
+
             <Route path="*" element={<div>Halaman belum tersedia</div>} />
           </Route>
 

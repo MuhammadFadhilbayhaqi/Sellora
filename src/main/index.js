@@ -12,8 +12,8 @@ console.log('[DEBUG] syncWorker =', syncWorker);
 // Register Auth IPC Handlers
 authController.registerAuthHandlers();
 
-// Nanti kita import routes backend di sini
-// const registerRoutes = require('./backend/routes');
+const masterController = require('./backend/controllers/master.controller');
+masterController.registerMasterHandlers();
 
 let mainWindow;
 

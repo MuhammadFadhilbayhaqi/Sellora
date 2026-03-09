@@ -38,6 +38,59 @@ db.prepare(`
   )
 `).run();
 
+// Master Data Tables
+db.prepare(`
+  CREATE TABLE IF NOT EXISTS kategori (
+    kategori_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nama TEXT NOT NULL,
+    deskripsi TEXT
+  )
+`).run();
+
+db.prepare(`
+  CREATE TABLE IF NOT EXISTS satuan (
+    satuan_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nama TEXT NOT NULL
+  )
+`).run();
+
+db.prepare(`
+  CREATE TABLE IF NOT EXISTS pelanggan (
+    pelanggan_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nama TEXT NOT NULL,
+    alamat TEXT,
+    kontak TEXT,
+    tipe TEXT CHECK(tipe IN ('umum', 'member')) DEFAULT 'umum'
+  )
+`).run();
+
+db.prepare(`
+  CREATE TABLE IF NOT EXISTS supplier (
+    supplier_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nama TEXT NOT NULL,
+    kontak TEXT,
+    alamat TEXT,
+    email TEXT
+  )
+`).run();
+
+db.prepare(`
+  CREATE TABLE IF NOT EXISTS produk (
+    produk_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nama TEXT NOT NULL,
+    kategori_id INTEGER,
+    satuan_id INTEGER,
+    harga_jual DECIMAL(10,2) NOT NULL,
+    harga_beli DECIMAL(10,2),
+    pajak DECIMAL(5,2),
+    status TEXT CHECK(status IN ('aktif', 'nonaktif')) DEFAULT 'aktif',
+    deskripsi TEXT,
+    stok INTEGER DEFAULT 0,
+    FOREIGN KEY (kategori_id) REFERENCES kategori(kategori_id),
+    FOREIGN KEY (satuan_id) REFERENCES satuan(satuan_id)
+  )
+`).run();
+
 // Seed default admin if no users exist
 const userCount = db.prepare('SELECT COUNT(*) as count FROM users').get();
 if (userCount.count === 0) {
