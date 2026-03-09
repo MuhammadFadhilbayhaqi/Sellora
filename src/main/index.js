@@ -1,19 +1,20 @@
 require('dotenv').config();
 
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow } = require('electron'); // ipcMain sudah tidak perlu di-import di sini
 const path = require('path');
-const backend = require('./backend');
 const syncWorker = require('./backend/workers/sync.worker');
-// Import auth controller
+
+// Import semua controller
 const authController = require('./backend/controllers/auth.controller');
+const masterController = require('./backend/controllers/master.controller');
+const appController = require('./backend/controllers/app.controller');
 
 console.log('[DEBUG] syncWorker =', syncWorker);
 
-// Register Auth IPC Handlers
+// Register IPC Handlers secara modular
 authController.registerAuthHandlers();
-
-const masterController = require('./backend/controllers/master.controller');
 masterController.registerMasterHandlers();
+appController.registerAppHandlers();
 
 let mainWindow;
 
@@ -40,26 +41,10 @@ function createWindow() {
   }
 }
 
-ipcMain.handle('app:get-version', () => {
-  return backend.appController.getAppVersion(app);
-});
-
-ipcMain.handle('app:get-saved-version', () => {
-  return backend.appController.getSavedVersion();
-});
-
-ipcMain.handle('transaction:create', (_, payload) => {
-  return backend.transactionController.createTransaction(payload);
-});
-
-ipcMain.handle('transaction:list', (_, limit) => {
-  return backend.transactionController.listTransactions(limit);
-});
-
 app.whenReady().then(() => {
-  // registerRoutes(); // Akan kita aktifkan nanti
   createWindow();
   syncWorker.startSyncWorker();
+  
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
@@ -68,5 +53,3 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
-
-

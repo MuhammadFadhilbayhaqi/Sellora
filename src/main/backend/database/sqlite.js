@@ -14,19 +14,6 @@ db.prepare(`
 `).run();
 
 db.prepare(`
-  CREATE TABLE IF NOT EXISTS transactions (
-    id TEXT PRIMARY KEY,
-    invoice_number TEXT NOT NULL,
-    total_amount INTEGER NOT NULL,
-    payment_method TEXT NOT NULL,
-    items TEXT NOT NULL,
-    status TEXT NOT NULL,
-    created_at INTEGER NOT NULL,
-    synced_at INTEGER
-  )
-`).run();
-
-db.prepare(`
   CREATE TABLE IF NOT EXISTS users (
     user_id TEXT PRIMARY KEY,
     username TEXT UNIQUE NOT NULL,

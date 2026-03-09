@@ -1,7 +1,9 @@
+const { ipcMain, app } = require('electron');
 const appService = require('../services/app.service');
 
-async function getAppVersion(app) {
+async function getAppVersion() {
   try {
+    // Kita langsung menggunakan 'app' dari import electron
     const version = appService.getAppVersion(app);
     return {
       success: true,
@@ -29,7 +31,17 @@ async function getSavedVersion() {
   }
 }
 
+// Fungsi untuk mendaftarkan semua routing IPC terkait App
+function registerAppHandlers() {
+  ipcMain.handle('app:get-version', () => {
+    return getAppVersion();
+  });
+
+  ipcMain.handle('app:get-saved-version', () => {
+    return getSavedVersion();
+  });
+}
+
 module.exports = {
-  getAppVersion,
-  getSavedVersion,
+  registerAppHandlers,
 };
